@@ -5,8 +5,8 @@
 
 	<groupId>com.konka.datademo</groupId>
 	<artifactId>datademo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
 
 	<name>datademo</name>
 	<description>datademo for Spring Boot</description>
@@ -20,8 +20,12 @@
 	</parent>
 
 	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!--properties节点中设置docker镜像的前缀“springboot”-->
+		<docker.image.prefix>springio</docker.image.prefix>
 		<java.version>1.8</java.version>
 
 		<!-- swagger2 -->
@@ -87,7 +91,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-<!--			<exclusions>
+			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
@@ -100,7 +104,13 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
-			</exclusions>-->
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- 开发工具(热部署) -->
@@ -258,11 +268,50 @@
             <artifactId>httpclient</artifactId>
         </dependency>
 
+		<!--加入redis-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
 
 	</dependencies>
 
 
 	<build>
+		<defaultGoal>compile</defaultGoal>
+
+		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+					<include>resources/**</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
+
+		<finalName>datademo</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -322,6 +371,12 @@
 					</dependency>
                 </dependencies>
             </plugin>
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.3.0.603</version>
+			</plugin>
 
 			<plugin>
 				<groupId>io.github.swagger2markup</groupId>
@@ -384,6 +439,8 @@
 			</plugin>
 
 		</plugins>
+
+		<!--<finalName>gs-spring-boot-docker-master</finalName>-->
 	</build>
 
 
