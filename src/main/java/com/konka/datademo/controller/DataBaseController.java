@@ -42,10 +42,10 @@ public class DataBaseController {
     
     
     /**
-     * 连接数据库
+     * 数据字典检查
      */
-    @PostMapping("/link")
-    @ApiOperation("连接数据库")
+    @PostMapping("")
+    @ApiOperation("数据字典检查")
     @ApiResponses({
             @ApiResponse(code = ExceptionCode.DataBase.ILLEGAL_PARAM_CODE, message = ExceptionCode.DataBase.ILLEGAL_PARAM_MSG),
             @ApiResponse(code=ExceptionCode.Login.ILLEGAL_PARAM_CODE, message = ExceptionCode.Login.ILLEGAL_PARAM_MSG),
