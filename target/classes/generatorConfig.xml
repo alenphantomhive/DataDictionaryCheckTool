@@ -32,7 +32,7 @@
 
 
         <!-- targetProject:生成PO类的位置 -->
-        <javaModelGenerator targetPackage="com.konka.datademo.model.po" targetProject="src\main\java">
+        <javaModelGenerator targetPackage="com.konka.DataDictionaryCheckTool.model.po" targetProject="src\main\java">
 
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
@@ -51,7 +51,7 @@
             3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
             注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
         -->
-        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.konka.datademo.mapper" targetProject="src\main\java">
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.konka.DataDictionaryCheckTool.mapper" targetProject="src\main\java">
 
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />

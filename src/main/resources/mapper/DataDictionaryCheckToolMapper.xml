@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.konka.DataDictionaryCheckTool.mapper.DataDictionaryCheckToolMapper">
+
+
+
+    <resultMap id="baseResultMap" type="com.konka.DataDictionaryCheckTool.model.po.DataDictionaryCheckTool">
+        <id column="table_name"  jdbcType="VARCHAR" property="tableName" />
+        <result column="column_name" jdbcType="VARCHAR" property="name" />
+        <result column="is_nullable" jdbcType="VARCHAR" property="nullAble" />
+        <result column="column_type" jdbcType="LONGVARCHAR" property="type" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List" >
+        table_name,column_name,is_nullable
+    </sql>
+    <sql id="Blob_Column_List" >
+        column_type
+    </sql>
+
+    <!--保存数据-->
+    <insert id="save" parameterType="com.konka.DataDictionaryCheckTool.model.po.DataDictionaryCheckTool" >
+        INSERT INTO
+            DataDictionaryCheckTooldemo.column (
+            `field`,
+            `type`,
+            `null`
+        )
+        VALUES(
+                  #{name},
+                  #{type},
+                  #{nullAble}
+              )
+    </insert>
+
+    <!--根据数据库名称获取数据字典-->
+    <select id="get" parameterType="java.lang.String" resultMap="baseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        TABLE_NAME,COLUMN_NAME,IS_NULLABLE,
+        <include refid="Blob_Column_List" />
+        COLUMN_TYPE
+        FROM information_schema.COLUMNS
+        <where>
+            TABLE_SCHEMA = #{schemaName,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <!--根据数据库表名称获取数据字典-->
+    <select id="getByTable" parameterType="java.lang.String" resultMap="baseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+         TABLE_NAME,COLUMN_NAME,IS_NULLABLE,
+        <include refid="Blob_Column_List" />
+        COLUMN_TYPE
+        FROM information_schema.COLUMNS
+        <where>
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+    <!--根据数据库字段名称获取数据字典-->
+    <select id="getByColumn"  resultMap="baseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        TABLE_NAME,COLUMN_NAME,IS_NULLABLE,
+        <include refid="Blob_Column_List" />
+        COLUMN_TYPE
+        FROM information_schema.COLUMNS
+        <where>
+            COLUMN_NAME= #{name,jdbcType=VARCHAR}
+            AND TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+        </where>
+    </select>
+</mapper>
