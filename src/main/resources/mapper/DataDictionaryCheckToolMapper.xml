@@ -57,8 +57,8 @@
         COLUMN_TYPE
         FROM information_schema.COLUMNS
         <where>
-      UPPER(TABLE_NAME) = UPPER(#{tableName,jdbcType=VARCHAR})
-            AND UPPER(TABLE_SCHEMA） = UPPER(#{schemaName,jdbcType=VARCHAR})
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+            AND TABLE_SCHEMA = #{schemaName,jdbcType=VARCHAR}
         </where>
     </select>
 
@@ -71,9 +71,9 @@
         COLUMN_TYPE
         FROM information_schema.COLUMNS
         <where>
-            UPPER(COLUMN_NAME）=UPPER( #{name,jdbcType=VARCHAR})
-            AND UPPER(TABLE_NAME） =UPPER( #{tableName,jdbcType=VARCHAR})
-            AND UPPER(TABLE_SCHEMA） =UPPER( #{schemaName,jdbcType=VARCHAR})
+            COLUMN_NAME= #{name,jdbcType=VARCHAR}
+            AND TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+            AND TABLE_SCHEMA = #{schemaName,jdbcType=VARCHAR}
         </where>
     </select>
 </mapper>
