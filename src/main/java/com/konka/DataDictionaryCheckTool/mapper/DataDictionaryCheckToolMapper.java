@@ -32,12 +32,10 @@ public interface DataDictionaryCheckToolMapper {
     
     /**
      * 根据数据库表名获取数据字典
-     * @param tableName 数据库表名
-     * @param schemaName 数据库名
+     * @param DataDictionaryCheckTool 数据库字段model
      * @return DataDictionaryCheckTool 数据字典列表
      */
-    List<DataDictionaryCheckTool> getByTable(@Param("tableName") String tableName,
-                                             @Param("schemaName ") String schemaName);
+    List<DataDictionaryCheckTool> getByTable(DataDictionaryCheckTool DataDictionaryCheckTool);
     
     /**
      * 根据数据库字段名获取数据字典

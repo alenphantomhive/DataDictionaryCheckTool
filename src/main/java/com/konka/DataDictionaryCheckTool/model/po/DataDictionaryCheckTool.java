@@ -12,10 +12,10 @@ import lombok.Data;
  **/
 @Data
 public class DataDictionaryCheckTool {
-   
-   /*
-    *数据源数据库，库名，
-    */
+ 
+ /**
+  * 数据库名称
+  */
     private String schemaName;
     
     /**

@@ -96,7 +96,10 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                         String tableName = table.getRow(rowSize - 4).getTableCells().get(variableProperties.getImportDataProperties().getTableNameCellNum()).getText().trim();
                         log.info("tableName = {}",tableName);
                         //获取数据库数据字典
-                        List<DataDictionaryCheckTool> baseList = DataDictionaryCheckToolMapper.getByTable(tableName,link.getDatasourceSchemaName());
+                        DataDictionaryCheckTool datas = new DataDictionaryCheckTool();
+                        datas.setTableName(tableName);
+                        datas.setSchemaName(link.getDatasourceSchemaName());
+                        List<DataDictionaryCheckTool> baseList = DataDictionaryCheckToolMapper.getByTable(datas);
                         if(baseList.isEmpty()){
                             log.info("查询数据字典失败，数据库表名 = {}",tableName);
                             ErrList errlist = new ErrList();
