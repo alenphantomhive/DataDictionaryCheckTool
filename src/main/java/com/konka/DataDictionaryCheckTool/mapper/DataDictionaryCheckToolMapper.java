@@ -1,6 +1,7 @@
 package com.konka.DataDictionaryCheckTool.mapper;
 
 import com.konka.DataDictionaryCheckTool.model.po.DataDictionaryCheckTool;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,9 +33,11 @@ public interface DataDictionaryCheckToolMapper {
     /**
      * 根据数据库表名获取数据字典
      * @param tableName 数据库表名
+     * @param schemaName 数据库名
      * @return DataDictionaryCheckTool 数据字典列表
      */
-    List<DataDictionaryCheckTool> getByTable(String tableName);
+    List<DataDictionaryCheckTool> getByTable(@Param("tableName") String tableName,
+                                             @Param("schemaName ") String schemaName);
     
     /**
      * 根据数据库字段名获取数据字典

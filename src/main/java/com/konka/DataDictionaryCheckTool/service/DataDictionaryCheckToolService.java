@@ -16,11 +16,11 @@ import java.util.List;
 public interface DataDictionaryCheckToolService {
     /**
      * 导入数据字典
-     *
+     * @param link 登陆
      * @param file 文件
      * @return 导入操作成功返回信息
      */
-     List<ErrList> importFile(MultipartFile file) ;
+     List<ErrList> importFile(LinkInDTO link,MultipartFile file) ;
     
     /**
      * 连接数据库

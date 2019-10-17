@@ -79,12 +79,14 @@ public interface ExceptionCode {
         int SERVER_NOT_FOUND_CODE = 9118004;
         String SERVER_NOT_FOUND_MSG = "获取数据信息失败";
         
-        
         int DELETE_ERROR_CODE = 9118005;
         String DELETE_ERROR_MSG = "删除数据失败";
         
         int FILE_ERROR_CODE = 9118006;
         String FILE_ERROR_MSG = "文件格式不对!请传后缀为“docx”的文件";
+    
+        int TABLE_ERROR_CODE = 9118007;
+        String TABLE_ERROR_MSG = "表格格式不对!请查看表格格式是否与模板相同";
         
         
     }

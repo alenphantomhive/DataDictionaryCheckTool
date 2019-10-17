@@ -2,6 +2,7 @@ package com.konka.DataDictionaryCheckTool.model.po;
 
 import lombok.Data;
 
+
 /**
  * @ClassName DataDictionaryCheckTool
  * @Description po
@@ -11,6 +12,11 @@ import lombok.Data;
  **/
 @Data
 public class DataDictionaryCheckTool {
+   
+   /*
+    *数据源数据库，库名，
+    */
+    private String schemaName;
     
     /**
      * 数据库表名称

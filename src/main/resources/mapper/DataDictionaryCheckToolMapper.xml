@@ -58,6 +58,7 @@
         FROM information_schema.COLUMNS
         <where>
       TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+            AND TABLE_SCHEMA = #{schemaName,jdbcType=VARCHAR}
         </where>
     </select>
 
@@ -72,6 +73,7 @@
         <where>
             COLUMN_NAME= #{name,jdbcType=VARCHAR}
             AND TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+            AND TABLE_SCHEMA = #{schemaName,jdbcType=VARCHAR}
         </where>
     </select>
 </mapper>

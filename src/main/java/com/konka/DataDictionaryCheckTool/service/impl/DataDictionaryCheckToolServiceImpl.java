@@ -54,7 +54,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
      * @return 导入操作成功返回信息
      */
     @Override
-    public List<ErrList> importFile(MultipartFile file) {
+    public List<ErrList> importFile(LinkInDTO link,MultipartFile file) {
         List<ErrList> errList = new ArrayList<>();
         String originalFilename = file.getOriginalFilename();
         log.info("fileName = {}", originalFilename);
@@ -68,6 +68,8 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                 Iterator<XWPFTable> it = docx.getTablesIterator();
                 // 设置需要读取的表格  set是设置需要读取的第几个表格
                 int set = variableProperties.getImportDataProperties().getTableNum();
+                if(link.getTableNum()!=null) {
+                    set=link.getTableNum();}
                 int num =set;
                 // 过滤前面不需要的表格
                     for (int i = 0; i < set-1; i++) {
@@ -87,10 +89,14 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                         int rowSize = table.getNumberOfRows() ;
                         log.info("导入数据总行数 = {}",rowSize-4);
                         //获取数据库名字
+                        if(rowSize<4){
+                            throw new BusinessException(ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_CODE, ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_MSG);
+                        }
+                        
                         String tableName = table.getRow(rowSize - 4).getTableCells().get(variableProperties.getImportDataProperties().getTableNameCellNum()).getText().trim();
                         log.info("tableName = {}",tableName);
                         //获取数据库数据字典
-                        List<DataDictionaryCheckTool> baseList = DataDictionaryCheckToolMapper.getByTable(tableName);
+                        List<DataDictionaryCheckTool> baseList = DataDictionaryCheckToolMapper.getByTable(tableName,link.getDatasourceSchemaName());
                         if(baseList.isEmpty()){
                             log.info("查询数据字典失败，数据库表名 = {}",tableName);
                             ErrList errlist = new ErrList();
@@ -117,10 +123,11 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                             String name = cells.get(variableProperties.getImportDataProperties().getNameCellNum()).getText().trim();
                             log.info("name = {}",name);
                             data.setName(name);
+                            data.setSchemaName(link.getDatasourceSchemaName());
                             DataDictionaryCheckTool base = DataDictionaryCheckToolMapper.getByColumn(data);
                             if(base==null){
-                                log.info("查询数据字典失败，数据库表名 = {}",tableName);
-                                log.info("查询数据字典失败，数据库字段名 = {}",name);
+                                log.info("查询数据字典数据库成功，数据库表名 = {}",tableName);
+                                log.info("查询数据字典数据库字段名失败，数据库字段名 = {}",name);
                                 ErrList errlist = new ErrList();
                                 errlist.setTableId(num);
                                 errlist.setRowId(j);
@@ -180,6 +187,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                         }
             } catch (IOException e) {
                 e.printStackTrace();
+                throw new BusinessException(ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_CODE, ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_MSG);
             }
         }
         else{
@@ -195,7 +203,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
     // 链接数据库，获取表名列表
     String driver = "com.mysql.jdbc.Driver";
     
-    String url = "jdbc:mysql://" + link.getDatasourceUrl() + "/" + link.getDatasourceDataDictionaryCheckTool();
+    String url = "jdbc:mysql://" + link.getDatasourceUrl() + "/" + link.getDatasourceSchemaName();
     
     String username =link.getDatasourceUsername();
     
@@ -232,6 +240,6 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
         throw new BusinessException(ExceptionCode.Project.FRAMEWORK_GENERATE_ERROR_CODE, ExceptionCode.Project.FRAMEWORK_GENERATE_ERROR_MSG + "数据库连接成功，但未提交文件");
     }
     
-    return this.importFile(file);
+    return this.importFile(link,file);
 }
 }

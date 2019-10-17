@@ -2,8 +2,10 @@ package com.konka.DataDictionaryCheckTool.controller;
 
 import com.konka.DataDictionaryCheckTool.common.Response;
 import com.konka.DataDictionaryCheckTool.exception.ExceptionCode;
+import com.konka.DataDictionaryCheckTool.model.po.Link;
 import com.konka.DataDictionaryCheckTool.model.request.LinkInDTO;
 import com.konka.DataDictionaryCheckTool.service.DataDictionaryCheckToolService;
+import com.konka.DataDictionaryCheckTool.utils.ParamValidationUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -51,9 +53,12 @@ public class DataDictionaryCheckToolController {
             @ApiResponse(code=ExceptionCode.Login.ILLEGAL_PARAM_CODE, message = ExceptionCode.Login.ILLEGAL_PARAM_MSG),
             @ApiResponse(code=ExceptionCode.Login.LOGIN_FAULT_CODE, message = ExceptionCode.Login.LOGIN_FAULT_MSG),
             @ApiResponse(code =ExceptionCode.DataDictionaryCheckTool.SERVER_NOT_FOUND_CODE,message =ExceptionCode.DataDictionaryCheckTool.SERVER_NOT_FOUND_MSG),
-            @ApiResponse(code = ExceptionCode.DataDictionaryCheckTool.ILLEGAL_PARAM_CODE,message =ExceptionCode.DataDictionaryCheckTool.FILE_ERROR_MSG)
+            @ApiResponse(code = ExceptionCode.DataDictionaryCheckTool.ILLEGAL_PARAM_CODE,message =ExceptionCode.DataDictionaryCheckTool.FILE_ERROR_MSG),
+            @ApiResponse(code = ExceptionCode.DataDictionaryCheckTool.ILLEGAL_PARAM_CODE,message =ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_MSG)
     })
     public Response<List> link(LinkInDTO link, MultipartFile file) {
+        //校验参数
+        ParamValidationUtil.check(link, ExceptionCode.Login.ILLEGAL_PARAM_CODE, ExceptionCode.Login.ILLEGAL_PARAM_MSG);
         return new Response<>(DataDictionaryCheckToolService.link(link,file));
     }
     

@@ -23,7 +23,7 @@ public class LinkInDTO {
     
     @ApiModelProperty(value = "数据源数据库，库名，必填", required = true, example = "framework-generator")
     @NotNull(message = "数据库库名不能为空")
-    private String datasourceDataDictionaryCheckTool;
+    private String datasourceSchemaName;
     
     @ApiModelProperty(value = "数据库登录用户名，必填", required = true, example = "root")
     @NotNull(message = "数据库登录用户名")
@@ -33,4 +33,9 @@ public class LinkInDTO {
     @NotNull(message = "数据库登录用户密码不能为空")
     private String datasourcePassword;
     
+    /**
+     * 设置开始表格
+     */
+    @ApiModelProperty(value = "设置开始表格,即从第几个表格开始校验，默认为5", example = "5")
+    private Integer tableNum ;
 }
