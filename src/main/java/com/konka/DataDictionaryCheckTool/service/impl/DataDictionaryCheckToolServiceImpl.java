@@ -152,7 +152,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                             String type = cells.get(variableProperties.getImportDataProperties().getTypeCellNum()).getText().trim();
                             log.info("type = {}",type);
                             data.setType(type);
-                            if(base!=null&&base.getType().equals(type)){
+                            if(base!=null&&!(base.getType().equals(type))){
                                 log.info("查询数据字典字段类型不匹配，数据库字段名 = {}",name);
                                 ErrList errlist = new ErrList();
                                 errlist.setTableId(num);
