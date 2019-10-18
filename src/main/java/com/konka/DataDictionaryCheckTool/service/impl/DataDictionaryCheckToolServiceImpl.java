@@ -68,9 +68,16 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                 Iterator<XWPFTable> it = docx.getTablesIterator();
                 // 设置需要读取的表格  set是设置需要读取的第几个表格
                 int set = variableProperties.getImportDataProperties().getTableNum();
+                int setBottomRows=4;
+                int setTableRow=4;
                 if(link.getTableNum()!=null) {
                     set=link.getTableNum();}
+                if(link.getBottomRows()!=null) {
+                    setBottomRows=link.getBottomRows();}
+                if(link.getDatabaseTableNameRow()!=null) {
+                    setTableRow=link.getDatabaseTableNameRow();}
                 int num =set;
+                
                 // 过滤前面不需要的表格
                     for (int i = 0; i < set-1; i++) {
                     it.hasNext();
@@ -87,13 +94,13 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                         
                         //获取的行数
                         int rowSize = table.getNumberOfRows() ;
-                        log.info("导入数据总行数 = {}",rowSize-4);
+                        log.info("导入数据总行数 = {}",rowSize-setBottomRows);
                         //获取数据库名字
-                        if(rowSize<4){
+                        if(rowSize<setBottomRows||setBottomRows<setTableRow){
                             throw new BusinessException(ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_CODE, ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_MSG);
                         }
                         
-                        String tableName = table.getRow(rowSize - 4).getTableCells().get(variableProperties.getImportDataProperties().getTableNameCellNum()).getText().trim();
+                        String tableName = table.getRow(rowSize - setTableRow).getTableCells().get(variableProperties.getImportDataProperties().getTableNameCellNum()).getText().trim();
                         log.info("tableName = {}",tableName);
                         //获取数据库数据字典
                         DataDictionaryCheckTool datas = new DataDictionaryCheckTool();
@@ -104,7 +111,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                             log.info("查询数据字典失败，数据库表名 = {}",tableName);
                             ErrList errlist = new ErrList();
                             errlist.setTableId(num);
-                            errlist.setRowId(rowSize-4);
+                            errlist.setRowId(rowSize-setTableRow);
                             errlist.setTableName(tableName);
                             errlist.setMsg("数据库表名错误");
                             errList.add(errlist);
@@ -112,8 +119,8 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                             }
                         else {
                         log.info("baseList = {}",baseList);
-                        //遍历所有数据行,第0行为标题行，后4行为数据库属性，略过
-                        for (int j = 1; j < rowSize-4; j++) {
+                        //遍历所有数据行,第0行为标题行，后setBottomRows行为数据库属性，略过
+                        for (int j = 1; j < rowSize-setBottomRows; j++) {
                             XWPFTableRow row = table.getRow(j);
                             //略过空行
                            if (row == null) {

@@ -38,4 +38,16 @@ public class LinkInDTO {
      */
     @ApiModelProperty(value = "设置开始表格,即从第几个表格开始校验，默认为5", example = "5")
     private Integer tableNum ;
+    
+    /**
+     * 设置表格底部行数
+     */
+    @ApiModelProperty(value = "设置表格底部特殊行行数,即表格后几行为非字段信息，默认为4", example = "4")
+    private Integer bottomRows;
+    
+    /**
+     * 设置表格数据表行
+     */
+    @ApiModelProperty(value = "设置表格数据表名行,即表格倒数第几行为表格数据表名信息，默认为4", example = "4")
+    private Integer databaseTableNameRow;
 }
