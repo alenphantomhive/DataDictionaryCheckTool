@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.konka.data.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.konka.DataDictionaryCheckTool.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -35,7 +35,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("DataDictionaryCheckTool")
                 .description("DataDictionaryCheckTool API接口文档")
-                .termsOfServiceUrl("http://localhost:8080/datademo/swagger-ui.html")
+                .termsOfServiceUrl("http://localhost:8080/DataDictionaryCheckTool/swagger-ui.html")
                 .version("1.0")
                 .build();
     }
