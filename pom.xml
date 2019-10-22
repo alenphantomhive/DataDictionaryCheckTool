@@ -273,7 +273,16 @@
 				<configuration>
 					<fork>true</fork>
 					<executable>true</executable>
+					<mainClass>com.konka.DataDictionaryCheckTool.Application</mainClass>
 				</configuration>
+
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
             <plugin>
