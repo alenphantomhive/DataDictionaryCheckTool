@@ -19,7 +19,7 @@ public interface DataDictionaryCheckToolService {
      * 导入数据字典
      * @param link 登陆
      * @param file 文件
-     * @param baseList 数据字典
+     * @param baseListAll 数据字典
      * @return 导入操作成功返回信息
      */
      List<ErrList> importFile(LinkInDTO link,MultipartFile file,List<DataDictionaryCheckTool> baseListAll) ;

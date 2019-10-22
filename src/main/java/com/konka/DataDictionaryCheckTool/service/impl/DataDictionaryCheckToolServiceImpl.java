@@ -91,7 +91,6 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                         XWPFTable table=it.next();
                         log.info("导入第几个表格 = {}",num);
                         List<DataDictionaryCheckTool> dataList = new ArrayList<>();
-                        
                         //获取的行数
                         int rowSize = table.getNumberOfRows() ;
                         log.info("导入数据总行数 = {}",rowSize-setBottomRows);
@@ -247,7 +246,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
     
     String sql = "SELECT  TABLE_SCHEMA, TABLE_NAME ,COLUMN_NAME ,COLUMN_TYPE ,IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS" ;
     
-    List<DataDictionaryCheckTool> baseList=new ArrayList<>();
+    List<DataDictionaryCheckTool> baseListAll=new ArrayList<>();
     
     try {
         Class.forName(driver);
@@ -267,10 +266,10 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
             datals.setName(resultSet.getString(3));
             datals.setType(resultSet.getString(4));
             datals.setNullAble(resultSet.getString(5));
-            baseList.add(datals);
+            baseListAll.add(datals);
             
         }
-        log.info("baseList= {}",baseList);
+        log.info("baseListAll= {}",baseListAll);
     } catch (Exception e) {
         
         log.error("数据库连接失败", e);
@@ -282,6 +281,6 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
         throw new BusinessException(ExceptionCode.Project.FRAMEWORK_GENERATE_ERROR_CODE, ExceptionCode.Project.FRAMEWORK_GENERATE_ERROR_MSG + "数据库连接成功，但未提交文件");
     }
     
-    return this.importFile(link,file,baseList);
+    return this.importFile(link,file,baseListAll);
 }
 }
