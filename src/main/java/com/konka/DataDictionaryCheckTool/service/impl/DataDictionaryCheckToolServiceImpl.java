@@ -193,13 +193,13 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                             String nullAble =cells.get(variableProperties.getImportDataProperties().getNullAbleCellNum()).getText().trim();
                             log.info("nullAble = {}",nullAble);
                             data.setNullAble(nullAble);
-                            if(base!=null&&"YES".equals(base.getNullAble())&&"是".equals(nullAble)){
+                            if(base.getName()!=null&&"YES".equals(base.getNullAble())&&"是".equals(nullAble)){
                                 log.info("数据库字段名可为空 = {}",nullAble);
                             }
-                                    else if(base!=null&&"NO".equals(base.getNullAble())&&"否".equals(nullAble)){
+                                    else if(base.getName()!=null&&"NO".equals(base.getNullAble())&&"否".equals(nullAble)){
                                 log.info("数据库字段可为空 = {}",nullAble);
                             }
-                                        else if (base!=null){
+                                        else if (base.getName()!=null){
                                 log.info("数据库字段名可为空 = {}",nullAble);
                                 ErrList errlist = new ErrList();
                                 errlist.setTableId(num);
@@ -229,6 +229,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
             throw new BusinessException(ExceptionCode.DataDictionaryCheckTool.FILE_ERROR_CODE, ExceptionCode.DataDictionaryCheckTool.FILE_ERROR_MSG);
             // "文件格式不对!请传后缀为“docx”的文件";
         }
+        
         return errList;
     }
     
