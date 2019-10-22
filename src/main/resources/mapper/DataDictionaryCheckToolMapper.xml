@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.konka.data.mapper.DataDictionaryCheckToolMapper">
+<mapper namespace="com.konka.DataDictionaryCheckTool.mapper.DataDictionaryCheckToolMapper">
 
 
 
-    <resultMap id="baseResultMap" type="com.konka.data.model.po.DataDictionaryCheckTool">
+    <resultMap id="baseResultMap" type="com.konka.DataDictionaryCheckTool.model.po.DataDictionaryCheckTool">
         <result column="COLUMN_NAME" jdbcType="VARCHAR" property="name" />
         <result column="SCHEMA_NAME"  jdbcType="VARCHAR" property="schemaName" />
         <result column="TABLE_NAME"  jdbcType="VARCHAR" property="tableName" />
@@ -22,7 +22,7 @@
     </sql>
 
     <!--保存数据-->
-    <insert id="save" parameterType="com.konka.data.model.po.DataDictionaryCheckTool" >
+    <insert id="save" parameterType="com.konka.DataDictionaryCheckTool.model.po.DataDictionaryCheckTool" >
         INSERT INTO
             DataDictionaryCheckTooldemo.column (
             `field`,
