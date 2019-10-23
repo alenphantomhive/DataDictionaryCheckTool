@@ -96,11 +96,7 @@ public class DataDictionaryCheckToolServiceImpl implements DataDictionaryCheckTo
                         log.info("导入数据总行数 = {}",rowSize-setBottomRows);
                         //获取数据库名字
                         if(rowSize<setBottomRows||setBottomRows<setTableRow){
-                            ErrList errlist = new ErrList();
-                            errlist.setTableId(num);
-                            errlist.setRowId(rowSize);
-                            errlist.setMsg("表格格式错误");
-                            errList.add(errlist);
+                            throw new BusinessException(ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_CODE, ExceptionCode.DataDictionaryCheckTool.TABLE_ERROR_MSG);
                         }
                         
                         String tableName = table.getRow(rowSize - setTableRow).getTableCells().get(variableProperties.getImportDataProperties().getTableNameCellNum()).getText().trim();

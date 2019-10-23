@@ -1,7 +1,0 @@
-
-fsquid:S00100&"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§åÛú
-usquid:S2293("YReplace the type specification in this constructor call with the diamond operator ("<>").(ï‹Ù»øÿÿÿÿ
-ksquid:S00100B"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å§ÇÙþÿÿÿÿ
-usquid:S2293D"YReplace the type specification in this constructor call with the diamond operator ("<>").(ï‹Ù»øÿÿÿÿ
-ksquid:S00100n"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù­ÆÝúÿÿÿÿ
-usquid:S2293p"YReplace the type specification in this constructor call with the diamond operator ("<>").(ï‹Ù»øÿÿÿÿ

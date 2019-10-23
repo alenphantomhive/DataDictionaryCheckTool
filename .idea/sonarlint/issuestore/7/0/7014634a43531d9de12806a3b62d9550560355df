@@ -1,13 +1,0 @@
-
-Œsquid:S00116*"hRename this field "DataDictionaryCheckToolMapper" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤Âßæùÿÿÿÿ8Œü¹‰ß-
-jsquid:CommentedOutCodeLineÀ"<This block of commented-out lines of code should be removed.(ÁÞ¢¯8Œü¹‰ß-
-Gsquid:S1148Ë"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8Œü¹‰ß-
-jsquid:CommentedOutCodeLineª"<This block of commented-out lines of code should be removed.(Û«¬Á8Œü¹‰ß-
-osquid:CommentedOutCodeLineÑ"<This block of commented-out lines of code should be removed.(Í¯ÍÑùÿÿÿÿ8Œü¹‰ß-
-psquid:S37769"RRefactor this method to reduce its Cognitive Complexity from 53 to the 15 allowed.(ÿ¸”‰8Œü¹‰ß-
-msquid:S3027="JPut single-quotes around '.' to use the faster "lastIndexOf(char)" method.(£Ü“øÿÿÿÿ8Œü¹‰ß-
-lsquid:S1192˜"MDefine a constant instead of duplicating this literal "errList = {}" 4 times.(‹»¾¥8Œü¹‰ß-
-^
-squid:S899S"<Do something with the "boolean" value returned by "hasNext".(å×ù›ùÿÿÿÿ8Œü¹‰ß-
-nsquid:CommentedOutCodeLinez"<This block of commented-out lines of code should be removed.(¡àÍ‘ùÿÿÿÿ8Œü¹‰ß-
-jsquid:CommentedOutCodeLine™"<This block of commented-out lines of code should be removed.(åíìå8Œü¹‰ß-
