@@ -54,7 +54,7 @@
 		<jruby.version>9.2.7.0</jruby.version>
 
 		<!--POI-->
-		<org.apache.poi.version>4.1.0</org.apache.poi.version>
+		<org.apache.poi.version>4.1.1</org.apache.poi.version>
 		<cn.hutool.version>4.1.14</cn.hutool.version>
 
 
